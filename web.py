@@ -18,7 +18,7 @@ class MyServer(BaseHTTPRequestHandler):
 
         # Читаем HTML-файл через конструкцию с менеджером контекста с помощью with open()
         try:
-            with open("app/templates/contacts.html", "r", encoding="utf-8") as file:
+            with open("catalog/templates/contacts.html", "r", encoding="utf-8") as file:
                 html_content = file.read()
             self.wfile.write(bytes(html_content, "utf-8"))
         except FileNotFoundError:
