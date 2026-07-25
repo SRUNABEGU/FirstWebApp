@@ -1,0 +1,66 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Клавиатуры",
+      "description": ""
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Коврики для мыши",
+      "description": ""
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Nuphy AIR75v2",
+      "image": "",
+      "category": "keyboards",
+      "price": 13213.0,
+      "created_at": "2026-07-24T21:00:00Z",
+      "updated_at": "2026-07-24T21:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "WL QISHA",
+      "image": "",
+      "category": "mousepads",
+      "price": 3808.0,
+      "created_at": "2026-07-24T21:00:00Z",
+      "updated_at": "2026-07-24T21:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "X-raypad Aqua Control",
+      "image": "",
+      "category": "mousepads",
+      "price": 3536.0,
+      "created_at": "2026-07-24T21:00:00Z",
+      "updated_at": "2026-07-24T21:00:00Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "MCHOSE Jet 75",
+      "image": "",
+      "category": "keyboards",
+      "price": 6270.0,
+      "created_at": "2026-07-24T21:00:00Z",
+      "updated_at": "2026-07-24T21:00:00Z"
+    }
+  }
+]
