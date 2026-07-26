@@ -28,16 +28,16 @@
                 <div class="card-body">
                     <table class="table table-striped">
                         <tr>
+                            <td class="w-25">Имя</td>
+                            <td>{{ contacts.name|default:"Не указано" }}</td>
+                        </tr>
+                        <tr>
                             <td class="w-25">Телефон</td>
                             <td>{{ contacts.phone|default:"Не указан" }}</td>
                         </tr>
                         <tr>
-                            <td class="w-25">Email</td>
-                            <td>{{ contacts.email|default:"Не указан" }}</td>
-                        </tr>
-                        <tr>
-                            <td class="w-25">Адрес</td>
-                            <td>{{ contacts.address|default:"Не указан" }}</td>
+                            <td class="w-25">Сообщение</td>
+                            <td>{{ contacts.message|default:"Не указано" }}</td>
                         </tr>
                     </table>
                 </div>
@@ -63,7 +63,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message">Сообщение</label>
-                            <textarea name="message" class="form-control" id="message" placeholder="Контактный телефон"
+                            <textarea name="message" class="form-control" id="message" placeholder="Сообщение"
                                       required></textarea>
                         </div>
                         <button type="submit" class="btn btn-lg btn-block btn-outline-primary">Отправить</button>

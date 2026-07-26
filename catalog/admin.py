@@ -16,4 +16,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(Contact)
 class ContactAdmin(admin.ModelAdmin):
-    list_display = ('id', 'phone', 'email')
+    list_display = ('id', 'name', 'phone', 'message')
