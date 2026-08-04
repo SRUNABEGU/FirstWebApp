@@ -1,0 +1,37 @@
+{% extends 'catalog/base.html' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">{{ product.name }}</h1>
+</div>
+
+<div class="row justify-content-center">
+    <div class="col-lg-9">
+        <div class="card box-shadow">
+            <div class="row g-0">
+                <div class="col-md-4 d-flex align-items-center justify-content-center p-3">
+                    {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+                    {% else %}
+                    <div class="text-muted">Нет изображения</div>
+                    {% endif %}
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h2 class="card-title">{{ product.price }} ₽</h2>
+                        <p class="card-text">
+                            <span class="badge bg-secondary">{{ product.category.name }}</span>
+                        </p>
+                        <p class="card-text">{{ product.description|default:"Нет описания" }}</p>
+                        <p class="card-text">
+                            <small class="text-muted">Добавлено: {{ product.created_at }}</small>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
