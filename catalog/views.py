@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse_lazy
 from django.utils import timezone
 from django.views import View
-from django.views.generic import TemplateView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.core.paginator import Paginator
 
 from catalog.forms import ProductForm
@@ -55,3 +56,21 @@ class ProductCreateView(CreateView):
         product.updated_at = timezone.now()
         product.save()
         return redirect('catalog:product_detail', pk=product.pk)
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+
+    def form_valid(self, form):
+        product = form.save(commit=False)
+        product.updated_at = timezone.now()
+        product.save()
+        return redirect('catalog:product_detail', pk=product.pk)
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_confirm_delete.html'
+    success_url = reverse_lazy('catalog:home')
