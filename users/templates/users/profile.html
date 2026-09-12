@@ -1,0 +1,30 @@
+{% extends 'catalog/base.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 70vh;">
+    <div class="card shadow-sm" style="width: 100%; max-width: 400px;">
+        <div class="card-body p-4">
+            <h3 class="text-center mb-4">Мой профиль</h3>
+
+            {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" class="rounded-circle mb-3"
+                 style="width: 100px; height: 100px; object-fit: cover;" alt="Аватар">
+            {% endif %}
+
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% for field in form %}
+                <div class="mb-3">
+                    <label class="form-label d-block">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    <div class="text-danger small mt-1">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button type="submit" class="btn btn-primary w-100 mt-2">Сохранить</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
