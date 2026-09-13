@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse_lazy
@@ -26,12 +27,6 @@ class AboutView(TemplateView):
     template_name = 'catalog/about.html'
 
 
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'catalog/product_detail.html'
-    context_object_name = 'product'
-
-
 class ContactsView(View):
     def get(self, request):
         contact_data = Contact.objects.first()
@@ -45,7 +40,8 @@ class ContactsView(View):
         return HttpResponse(f'Спасибо, {name}! Сообщение получено.')
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    login_url = 'users:login'
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -58,7 +54,8 @@ class ProductCreateView(CreateView):
         return redirect('catalog:product_detail', pk=product.pk)
 
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = 'users:login'
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_form.html'
@@ -70,7 +67,15 @@ class ProductUpdateView(UpdateView):
         return redirect('catalog:product_detail', pk=product.pk)
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = 'users:login'
     model = Product
     template_name = 'catalog/product_confirm_delete.html'
     success_url = reverse_lazy('catalog:home')
+
+
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url = 'users:login'
+    model = Product
+    template_name = 'catalog/product_detail.html'
+    context_object_name = 'product'
