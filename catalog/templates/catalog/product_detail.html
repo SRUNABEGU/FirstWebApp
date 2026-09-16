@@ -23,14 +23,36 @@
                         <h2 class="card-title">{{ product.price }} ₽</h2>
                         <p class="card-text">
                             <span class="badge bg-secondary">{{ product.category.name }}</span>
+                            {% if product.is_published %}
+                            <span class="badge bg-success">Опубликован</span>
+                            {% else %}
+                            <span class="badge bg-warning text-dark">Черновик</span>
+                            {% endif %}
                         </p>
                         <p class="card-text">{{ product.description|default:"Нет описания" }}</p>
                         <p class="card-text">
                             <small class="text-muted">Добавлено: {{ product.created_at }}</small>
                         </p>
+
                         <div class="mt-3">
+                            {# Задание 2: редактировать может только владелец #}
+                            {% if product.owner == request.user %}
                             <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-outline-primary">Редактировать</a>
+                            {% endif %}
+
+                            {# Задание 2: удалять может владелец или модератор с правом delete_product #}
+                            {% if product.owner == request.user or perms.catalog.delete_product %}
                             <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-outline-danger">Удалить</a>
+                            {% endif %}
+
+                            {# Задание 1: отменить публикацию может модератор с кастомным правом #}
+                            {% if product.is_published and perms.catalog.can_unpublish_product %}
+                            <form method="post" action="{% url 'catalog:product_unpublish' product.pk %}"
+                                  class="d-inline">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-outline-warning">Отменить публикацию</button>
+                            </form>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
